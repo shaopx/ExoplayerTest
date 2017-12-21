@@ -1,6 +1,7 @@
 package com.sogo.exoplayer;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
@@ -84,8 +85,9 @@ public class PlayerManager {
                             SimpleExoPlayer.VideoListener videoListener,
                             boolean userAction) {
         VLog.d(TAG, "attchPlayer  videoUrl:" + videoUri + ", playerHolder:" + playerHolder);
-        if (sPlayerHolder == playerHolder || videoUri.equals(player.getPlayUrl())) {
+        if ((sPlayerHolder == playerHolder || videoUri.equals(player.getPlayUrl())&& !player.isReleased())) {
 //            if (player.isPlaying()) {
+            Log.d(TAG, "attchPlayer: return!");
                 return;
 //            }
         }
@@ -122,6 +124,12 @@ public class PlayerManager {
             sPlayerHolder = null;
             sVideoUrl = null;
             currentPlayerHolders.remove(videoUrl);
+        }
+    }
+
+    public void release(String videoUrl){
+        if (player != null) {
+            player.release();
         }
     }
 }

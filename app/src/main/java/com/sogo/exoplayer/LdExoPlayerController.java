@@ -74,6 +74,12 @@ public class LdExoPlayerController implements PlayerManager.PlayerHolder {
         initViews();
     }
 
+    public void transform(String videoUrl){
+        PlayerManager instance = PlayerManager.getInstance();
+        PlayerWrapper player = instance.getPlayer(null);
+        player.transform(mPlayerView);
+    }
+
     View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -89,6 +95,7 @@ public class LdExoPlayerController implements PlayerManager.PlayerHolder {
         initPlayer(userAction);
         mPlayer.play();
     }
+
 
     private SimpleExoPlayer.VideoListener videoListener = new SimpleExoPlayer.VideoListener() {
         @Override
@@ -242,6 +249,11 @@ public class LdExoPlayerController implements PlayerManager.PlayerHolder {
         VLog.d(TAG, "onViewDetachedFromWindow content:" + mContent + ", articleId:" + mId);
         VLog.d(TAG, "onViewDetachedFromWindow: ...videoUrl:" + mVideoUrl);
         PlayerManager.getInstance().detachPlayer(this, mVideoUrl);
+    }
+
+    public void release(){
+        VLog.d(TAG, "release content:" + mContent + ", articleId:" + mId);
+        PlayerManager.getInstance().release(mVideoUrl);
     }
 
     @Override

@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#cc000000"
     tools:context="com.spx.exoplayertest.VideoPlayActivity">
 
     <RelativeLayout
         android:id="@+id/player_area"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
-        android:layout_below="@+id/title_tv"
-        android:layout_marginTop="0dp">
+        android:layout_height="@dimen/player_view_height"
+        android:layout_below="@+id/title_tv">
 
         <include layout="@layout/video_layout" />
     </RelativeLayout>

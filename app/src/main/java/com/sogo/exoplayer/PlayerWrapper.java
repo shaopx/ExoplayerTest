@@ -49,6 +49,7 @@ public final class PlayerWrapper {
 //    private final ImaAdsLoader adsLoader;
 
     private SimpleExoPlayer player;
+    private SimpleExoPlayerView simpleExoPlayerView;
     private long contentPosition;
     private boolean playFinished = false;
     private boolean isPlaying = false;
@@ -116,7 +117,8 @@ public final class PlayerWrapper {
 
     private void initPlayer(Context context, SimpleExoPlayerView simpleExoPlayerView, boolean userAction) {
         // Create a default track selector.
-        VLog.d(TAG, "initPlayer: ... "+userAction);
+        VLog.d(TAG, "initPlayer: ... " + userAction);
+        this.simpleExoPlayerView = simpleExoPlayerView;
         player = ExoPlayerFactory.newSimpleInstance(new DefaultRenderersFactory(context),
                 mTrackSelector, new LdDefaultLoadControl(userAction));
 
@@ -146,6 +148,12 @@ public final class PlayerWrapper {
 
         player.addListener(mEventListener);
         player.addVideoListener(mVideoListener);
+        hasReleased = false;
+    }
+
+    public void transform(SimpleExoPlayerView newSimpleExoPlayerView){
+        newSimpleExoPlayerView.setPlayer(player);
+        simpleExoPlayerView.setPlayer(null);
     }
 
     public void onPlayFinished() {
@@ -171,6 +179,7 @@ public final class PlayerWrapper {
         }
 
         isPlaying = true;
+        hasReleased = false;
     }
 
     public boolean isIdle() {
@@ -190,6 +199,8 @@ public final class PlayerWrapper {
         }
     }
 
+    private boolean hasReleased = false;
+
     public void release() {
         VLog.d(TAG, "release: ...");
         if (player != null) {
@@ -197,6 +208,7 @@ public final class PlayerWrapper {
             player.removeListener(mEventListener);
             player.removeVideoListener(mVideoListener);
             player.release();
+            hasReleased = true;
 //            player = null;
         }
 //        adsLoader.release();
@@ -204,5 +216,9 @@ public final class PlayerWrapper {
 
     public String getPlayUrl() {
         return mVideoUrl;
+    }
+
+    public boolean isReleased() {
+        return hasReleased;
     }
 }

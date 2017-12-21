@@ -55,6 +55,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
     private class ViewHolder extends RecyclerView.ViewHolder {
 
         private LdExoPlayerController controller;
@@ -66,13 +76,8 @@ public class MainActivity extends AppCompatActivity {
             controller = new LdExoPlayerController(itemView);
             titleTv = itemView.findViewById(R.id.title_tv);
             playView = itemView.findViewById(R.id.player_view);
-//            playView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    int adapterPosition = getAdapterPosition();
-//                    String url = mUrls.get(adapterPosition);
-//                }
-//            });
+
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -82,7 +87,22 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(itemView.getContext(), VideoPlayActivity.class);
                     intent.putExtra("play_url", url);
                     intent.putExtra("play_id", adapterPosition);
+                    int[] location = new int[2];
+                    playView.getLocationOnScreen(location);
+                    int width = playView.getWidth();
+                    int height = playView.getHeight();
+                    intent.putExtra("view_x", location[0]);
+                    intent.putExtra("view_y", location[1]);
+                    intent.putExtra("view_w", width);
+                    intent.putExtra("view_h", height);
+
                     itemView.getContext().startActivity(intent);
+                    itemView.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            controller.onDetached();
+                        }
+                    }, 300);
                 }
             });
         }
