@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -36,6 +37,13 @@ public class VideoPlayActivity extends Activity {
         setContentView(R.layout.activity_video_play);
 
         mRootView = findViewById(R.id.rootview);
+//        mRootView.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                Log.d(TAG, "onTouch: ..."+event.toString());
+//                return true;
+//            }
+//        });
 
         mVideoId = getIntent().getIntExtra("play_id", 0);
         mVideoUrl = getIntent().getStringExtra("play_url");

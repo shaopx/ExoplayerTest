@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.spx.exoplayertest.DraggableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rootview"
     android:layout_width="match_parent"
@@ -9,10 +9,9 @@
     <RelativeLayout
         android:id="@+id/player_area"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/player_view_height"
-        android:layout_below="@+id/title_tv">
+        android:layout_height="@dimen/player_view_height">
 
         <include layout="@layout/video_layout" />
     </RelativeLayout>
 
-</RelativeLayout>
+</com.spx.exoplayertest.DraggableLayout>

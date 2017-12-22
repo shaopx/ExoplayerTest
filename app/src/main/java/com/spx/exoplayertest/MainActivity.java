@@ -42,17 +42,7 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
 
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
 
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-            }
-        });
     }
 
     @Override
@@ -76,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
             controller = new LdExoPlayerController(itemView);
             titleTv = itemView.findViewById(R.id.title_tv);
             playView = itemView.findViewById(R.id.player_view);
-
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
