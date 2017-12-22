@@ -151,9 +151,13 @@ public final class PlayerWrapper {
         hasReleased = false;
     }
 
-    public void transform(SimpleExoPlayerView newSimpleExoPlayerView){
+    public void transformIn(SimpleExoPlayerView newSimpleExoPlayerView){
         newSimpleExoPlayerView.setPlayer(player);
         simpleExoPlayerView.setPlayer(null);
+    }
+    public void transformOut(SimpleExoPlayerView newSimpleExoPlayerView){
+        simpleExoPlayerView.setPlayer(player);
+        newSimpleExoPlayerView.setPlayer(null);
     }
 
     public void onPlayFinished() {
@@ -202,13 +206,14 @@ public final class PlayerWrapper {
     private boolean hasReleased = false;
 
     public void release() {
-        VLog.d(TAG, "release: ...");
+        VLog.d(TAG, "release: ..."+this);
         if (player != null) {
             isPlaying = false;
             player.removeListener(mEventListener);
             player.removeVideoListener(mVideoListener);
             player.release();
             hasReleased = true;
+            VLog.d(TAG, "release: ...hasReleased!");
 //            player = null;
         }
 //        adsLoader.release();

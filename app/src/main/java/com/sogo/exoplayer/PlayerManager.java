@@ -84,8 +84,10 @@ public class PlayerManager {
                             Player.EventListener eventListener,
                             SimpleExoPlayer.VideoListener videoListener,
                             boolean userAction) {
-        VLog.d(TAG, "attchPlayer  videoUrl:" + videoUri + ", playerHolder:" + playerHolder);
-        if ((sPlayerHolder == playerHolder || videoUri.equals(player.getPlayUrl())&& !player.isReleased())) {
+        VLog.d(TAG, "attchPlayer  videoUrl:" + videoUri + ", player:" + player);
+        VLog.d(TAG, "attchPlayer  player.isReleased():" + player.isReleased());
+        if ((sPlayerHolder == playerHolder || videoUri.equals(player.getPlayUrl()))
+                && !player.isReleased()) {
 //            if (player.isPlaying()) {
             Log.d(TAG, "attchPlayer: return!");
                 return;

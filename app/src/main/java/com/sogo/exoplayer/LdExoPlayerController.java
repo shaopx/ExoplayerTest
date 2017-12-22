@@ -74,10 +74,16 @@ public class LdExoPlayerController implements PlayerManager.PlayerHolder {
         initViews();
     }
 
-    public void transform(String videoUrl){
+    public void transformIn(String videoUrl){
         PlayerManager instance = PlayerManager.getInstance();
         PlayerWrapper player = instance.getPlayer(null);
-        player.transform(mPlayerView);
+        player.transformIn(mPlayerView);
+    }
+
+    public void transformOut(){
+        PlayerManager instance = PlayerManager.getInstance();
+        PlayerWrapper player = instance.getPlayer(null);
+        player.transformOut(mPlayerView);
     }
 
     View.OnClickListener clickListener = new View.OnClickListener() {
