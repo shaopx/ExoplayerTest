@@ -28,6 +28,7 @@ import com.google.android.exoplayer2.upstream.cache.CacheUtil;
 import com.google.android.exoplayer2.upstream.cache.LeastRecentlyUsedCacheEvictor;
 import com.google.android.exoplayer2.upstream.cache.SimpleCache;
 import com.google.android.exoplayer2.util.Util;
+import com.google.android.exoplayer2.video.VideoListener;
 import com.spx.exoplayertest.R;
 
 import java.io.File;
@@ -57,7 +58,7 @@ public final class PlayerWrapper {
     private TrackSelector mTrackSelector;
     private String mVideoUrl;
     private Player.EventListener mEventListener;
-    private SimpleExoPlayer.VideoListener mVideoListener;
+    private VideoListener mVideoListener;
 
 
     private DataSource.Factory dataSourceFactory = null;
@@ -98,7 +99,7 @@ public final class PlayerWrapper {
         DataSpec dataSpec = new DataSpec(Uri.parse(videoUri), 0, 512 * 1024, null);
         CacheUtil.CachingCounters counters = new CacheUtil.CachingCounters();
         try {
-            CacheUtil.cache(dataSpec, simpleCache, dataSourceFactory.createDataSource(), counters);
+            CacheUtil.cache(dataSpec, simpleCache, dataSourceFactory.createDataSource(), counters, null);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {

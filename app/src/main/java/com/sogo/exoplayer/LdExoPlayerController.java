@@ -1,6 +1,7 @@
 package com.sogo.exoplayer;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -124,9 +125,14 @@ public class LdExoPlayerController implements PlayerManager.PlayerHolder {
     };
 
     private Player.EventListener listener = new Player.EventListener() {
+//        @Override
+//        public void onTimelineChanged(Timeline timeline, Object manifest) {
+//            VLog.d(TAG, "onTimelineChanged: timeline:" + timeline.toString());
+//        }
+
         @Override
-        public void onTimelineChanged(Timeline timeline, Object manifest) {
-            VLog.d(TAG, "onTimelineChanged: timeline:" + timeline.toString());
+        public void onTimelineChanged(Timeline timeline, @Nullable Object manifest, int reason) {
+
         }
 
         @Override

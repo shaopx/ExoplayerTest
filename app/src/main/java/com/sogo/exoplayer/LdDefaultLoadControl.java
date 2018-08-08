@@ -156,13 +156,34 @@ public final class LdDefaultLoadControl implements LoadControl {
     }
 
     @Override
-    public boolean shouldStartPlayback(long bufferedDurationUs, boolean rebuffering) {
+    public long getBackBufferDurationUs() {
+        return 0;
+    }
+
+    @Override
+    public boolean retainBackBufferFromKeyframe() {
+        return false;
+    }
+
+//    @Override
+//    public boolean shouldContinueLoading(long bufferedDurationUs, float playbackSpeed) {
+//        return false;
+//    }
+
+    @Override
+    public boolean shouldStartPlayback(long bufferedDurationUs, float playbackSpeed, boolean rebuffering) {
         long minBufferDurationUs = rebuffering ? bufferForPlaybackAfterRebufferUs : bufferForPlaybackUs;
         return minBufferDurationUs <= 0 || bufferedDurationUs >= minBufferDurationUs;
     }
 
-    @Override
-    public boolean shouldContinueLoading(long bufferedDurationUs) {
+    //    @Override
+//    public boolean shouldStartPlayback(long bufferedDurationUs, boolean rebuffering) {
+//        long minBufferDurationUs = rebuffering ? bufferForPlaybackAfterRebufferUs : bufferForPlaybackUs;
+//        return minBufferDurationUs <= 0 || bufferedDurationUs >= minBufferDurationUs;
+//    }
+
+//    @Override
+    public boolean shouldContinueLoading(long bufferedDurationUs, float playbackSpeed) {
         if (!VUtil.isWifiConnected(VUtil.getApplication())) {
             if(!userAction){
                 return false;
